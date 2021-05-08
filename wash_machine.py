@@ -5,12 +5,19 @@ class WashingMachine:
 
     def wash_clothes(self, powder=int(input('Введите количество порошка: ')),
                      conditioner=int(input('Введите количество ополаскивателя: '))):
-        if powder < self.powder and conditioner < self.conditioner:
+        if powder > self.powder and conditioner > self.conditioner:
+            print(f'Пополните запасы порошка на {(powder - self.powder)} гр\n'
+                  f'И ополаскивателя на {(conditioner - self.conditioner)} мл')
+        elif powder > self.powder:
+            print(f'Пополните запасы порошка на {(powder - self.powder)} гр')
+        elif conditioner > self.conditioner:
+            print(f'Пополните запасы ополаскивателя на {(conditioner - self.conditioner)} мл')
+        else:
             self.subtract_powder(powder)
             self.subtract_conditioner(conditioner)
             print('Стирка завершена')
-        else:
-            print('Пополните запасы!')
+            print(f'Порошка осталось {self.powder}гр')
+            print(f'Ополаскивателя осталось {self.conditioner}мл')
 
     def subtract_powder(self, powder):
         self.powder -= powder
@@ -21,5 +28,3 @@ class WashingMachine:
 
 w = WashingMachine()
 w.wash_clothes()
-print(w.powder)
-print(w.conditioner)
